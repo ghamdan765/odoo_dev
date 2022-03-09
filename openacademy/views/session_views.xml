@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <data>
+      <!-- Session Form View -->
+    <record id="session_view_form" model="ir.ui.view">
+        <field name="name">session.form</field>
+        <field name="model">openacademy.session</field>
+        <field name="arch" type="xml">
+            <form string="Sesssion Form">
+                <sheet>
+                    <group>
+                        <group string="General">
+                            <field name="course_id"/>
+                            <field name="name"/>
+                            <field name="instructor_id"/>
+                            <field name="active"/>
+                        </group>
+                        <group string="Schedule">
+                            <field name="start_date"/>
+                            <field name="duration"/>
+                            <field name="seats"/>
+                            <field name="taken_seats" widget="progressbar"/>
+                        </group>
+                    </group>
+                    <group>
+                    </group>
+
+                    <label for="attendees"/>
+                    <field name="attendees"/>
+
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+ <!-- Session Tree(list) View -->
+      <record id="session_view_tree" model="ir.ui.view">
+        <field name="name">session.tree</field>
+        <field name="model">openacademy.session</field>
+        <field name="arch" type="xml">
+            <tree string="Session Tree">
+                <field name="name"/>
+                <field name="course_id"/>
+                 <field name="taken_seats" widget="progressbar"/>
+
+            </tree>
+        </field>
+      </record>
+
+      <!-- Session Search View -->
+    <record id="session_view_search" model="ir.ui.view">
+        <field name="name">session.search</field>
+        <field name="model">openacademy.session</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="course_id"/>
+                <field name="instructor_id"/>
+            </search>
+        </field>
+    </record>
+
+<!--   window action-->
+<!--      the following tag is an action definition for a "window ction",-->
+<!--      that is an action opening a view or a set of views-->
+
+      <record id='session_list_action' model='ir.actions.act_window'>
+          <field name="name">Session</field>
+          <field name="res_model">openacademy.session</field>
+          <field name="view_mode">tree,form</field>
+          <field name="help" type="html">
+                  <p class="o_view_nocontent_smiling_face"> Create the first session</p>
+          </field>
+      </record>
+
+
+<!--      the following menuitem should appear "after"-->
+<!--      its parent openacademy menu and "after"its -->
+<!--      action course list action-->
+      <menuitem name="Session" id="session_menu"  parent="openacademy_menu" action="session_list_action"/>
+<!--      Full id location-->
+<!--      action="openacademy.course_list_action"-->
+<!--      Its not required when it is the same module-->
+
+
+  </data>
+</odoo>

@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <data>
+      <!-- Form View -->
+    <record id="course_view_form" model="ir.ui.view">
+        <field name="name">course.form</field>
+        <field name="model">openacademy.course</field>
+        <field name="arch" type="xml">
+            <form string="Course Form">
+                <sheet>
+                    <group string="General">
+                        <field name="name"/>
+                        <field name="responsible_id"/>
+                    </group>
+                    <notebook>
+                        <page string="Description">
+                            <field name="description"/>
+                        </page>
+                        <page string="Sessions">
+                            <field name="session_ids">
+                                <tree string="Registered Sessions">
+                                    <field name="name"/>
+                                    <field name="instructor_id"/>
+                                    <field name="start_date"/>
+                                    <field name="duration"/>
+                                    <field name="seats"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+ <!-- Tree(list) View -->
+      <record id="course_view_tree" model="ir.ui.view">
+        <field name="name">course.tree</field>
+        <field name="model">openacademy.course</field>
+        <field name="arch" type="xml">
+            <tree string="Course Tree">
+                <field name="name"/>
+                <field name="responsible_id"/>
+            </tree>
+        </field>
+      </record>
+
+      <!-- Search View -->
+    <record id="course_view_search" model="ir.ui.view">
+        <field name="name">course.search</field>
+        <field name="model">openacademy.course</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="responsible_id"/>
+            </search>
+        </field>
+    </record>
+
+<!--   window action-->
+<!--      the following tag is an action definition for a "window ction",-->
+<!--      that is an action opening a view or a set of views-->
+
+      <record id='course_list_action' model='ir.actions.act_window'>
+          <field name="name">Courses</field>
+          <field name="res_model">openacademy.course</field>
+          <field name="view_mode">tree,form</field>
+          <field name="help" type="html">
+                  <p class="o_view_nocontent_smiling_face"> Create the first course</p>
+          </field>
+      </record>
+<!--      top level menu: no parent-->
+      <menuitem name="Open Academy" id="main_openacademy_menu" />
+<!--      A first level in the left side menu is needed befor -->
+<!--      using action=attribute-->
+      <menuitem name="Open Academy" id="openacademy_menu"  parent="main_openacademy_menu"/>
+<!--      the following menuitem should appear "after"-->
+<!--      its parent openacademy menu and "after"its -->
+<!--      action course list action-->
+      <menuitem name="Courses" id="cousres_menu"  parent="openacademy_menu" action="course_list_action"/>
+<!--      Full id location-->
+<!--      action="openacademy.course_list_action"-->
+<!--      Its not required when it is the same module-->
+
+
+  </data>
+</odoo>
